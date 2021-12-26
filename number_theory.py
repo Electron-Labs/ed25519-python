@@ -40,9 +40,32 @@ def inv(a,p):
     assert (a*x1)%p == 1
     return x1
 
-primes = [3,5,7,11,13,17,19]
+def a_power_n(a,n,p): # n is large
+  if n==1:
+    return a
+  if n%2 == 0:
+    return ((a_power_n(a,n/2,p))**2)%p
+  elif n%2==1:
+    return ((a_power_n(a,(n-1)/2,p))**2 * a )%p
 
-for p in primes:
-    print("Prime = "+ str(p))
-    for a in range(1,p):
-        print("a = "+ str(a) + ", inv = "+str(inv(a,p)))
+def fermat_inv(a,p):
+  apminus2 = a_power_n(a,p-2,p)
+  a_inv = apminus2%p
+  assert ((a%p)*a_inv)%p == 1
+  return a_inv
+
+def test_fermat_inv():
+  primes = [3,5,7,11,13,17,19]
+
+  for p in primes:
+      print("Prime = "+ str(p))
+      for a in range(1,p):
+          print("a = "+ str(a) + ", inv = "+str(fermat_inv(a,p)))
+
+def test_inv():
+  primes = [3,5,7,11,13,17,19]
+
+  for p in primes:
+      print("Prime = "+ str(p))
+      for a in range(1,p):
+          print("a = "+ str(a) + ", inv = "+str(inv(a,p)))
