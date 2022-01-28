@@ -44,9 +44,9 @@ def a_power_n(a,n,p): # n is large
   if n==1:
     return a
   if n%2 == 0:
-    return ((a_power_n(a,n/2,p))**2)%p
+    return ((a_power_n(a,n//2,p))**2)%p
   elif n%2==1:
-    return ((a_power_n(a,(n-1)/2,p))**2 * a )%p
+    return ((a_power_n(a,(n-1)//2,p))**2 * a )%p
 
 def fermat_inv(a,p):
   apminus2 = a_power_n(a,p-2,p)
